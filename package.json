@@ -14,7 +14,8 @@
     "@heroicons/vue": "^2.1.1",
     "@pinia/nuxt": "^0.5.1",
     "chart.js": "^4.4.1",
-    "nuxt": "^3.10.0",
+    "magicast": "0.3.5",
+    "nuxt": "3.11.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-chartjs": "^5.3.0",
@@ -22,8 +23,14 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@oxc-minify/binding-linux-x64-gnu": "^0.111.0",
+    "@oxc-parser/binding-linux-x64-gnu": "^0.111.0",
+    "@oxc-resolver/binding-linux-x64-gnu": "^11.16.4",
+    "@oxc-transform/binding-linux-x64-gnu": "^0.111.0",
     "@types/node": "^25.0.10",
+    "@vue-macros/common": "1.12.2",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "5.2.0"
   }
 }
