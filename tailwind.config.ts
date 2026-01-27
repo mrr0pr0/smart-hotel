@@ -8,23 +8,9 @@ export default {
         "./plugins/**/*.{js,ts}",
         "./app.vue",
     ],
-    darkMode: 'class',
     theme: {
         extend: {
             colors: {
-                // Dark theme colors
-                dark: {
-                    bg: '#0a0a0a',
-                    surface: '#111111',
-                    card: '#1a1a1a',
-                    border: '#2a2a2a',
-                    hover: '#222222',
-                },
-                gray: {
-                    750: '#2d3748',
-                    850: '#1a202c',
-                    950: '#0d1117',
-                },
                 primary: {
                     50: '#f0f9ff',
                     100: '#e0f2fe',
@@ -36,7 +22,6 @@ export default {
                     700: '#0369a1',
                     800: '#075985',
                     900: '#0c4a6e',
-                    950: '#082f49',
                 },
                 accent: {
                     50: '#fdf4ff',
@@ -54,10 +39,6 @@ export default {
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],
             },
-            boxShadow: {
-                'dark': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
-                'dark-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3)',
-            }
         },
     },
     plugins: [],
