@@ -1,0 +1,148 @@
+<template>
+  <div class="p-8">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-white mb-2">Room Management</h1>
+        <p class="text-gray-400">Manage all hotel rooms and availability</p>
+      </div>
+      <button class="btn-primary" @click="showAddModal = true">Add New Room</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid md:grid-cols-4 gap-6 mb-8">
+      <div class="card">
+        <h3 class="text-gray-400 text-sm mb-1">Total Rooms</h3>
+        <p class="text-3xl font-bold text-white">156</p>
+      </div>
+      <div class="card">
+        <h3 class="text-gray-400 text-sm mb-1">Available</h3>
+        <p class="text-3xl font-bold text-green-400">64</p>
+      </div>
+      <div class="card">
+        <h3 class="text-gray-400 text-sm mb-1">Occupied</h3>
+        <p class="text-3xl font-bold text-red-400">82</p>
+      </div>
+      <div class="card">
+        <h3 class="text-gray-400 text-sm mb-1">Maintenance</h3>
+        <p class="text-3xl font-bold text-yellow-400">10</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card mb-6">
+      <div class="flex gap-4">
+        <select class="input flex-1">
+          <option>All Floors</option>
+          <option>Floor 1</option>
+          <option>Floor 2</option>
+          <option>Floor 3</option>
+          <option>Floor 4</option>
+        </select>
+        <select class="input flex-1">
+          <option>All Status</option>
+          <option>Available</option>
+          <option>Occupied</option>
+          <option>Maintenance</option>
+        </select>
+        <select class="input flex-1">
+          <option>All Types</option>
+          <option>Single</option>
+          <option>Double</option>
+          <option>Suite</option>
+          <option>Deluxe</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Rooms Table -->
+    <div class="card overflow-hidden">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Room Number</th>
+            <th>Type</th>
+            <th>Floor</th>
+            <th>Price/Night</th>
+            <th>Status</th>
+            <th>Last Cleaned</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="room in rooms" :key="room.id">
+            <td class="font-semibold">{{ room.number }}</td>
+            <td>{{ room.type }}</td>
+            <td>{{ room.floor }}</td>
+            <td>${{ room.price }}</td>
+            <td>
+              <span :class="room.status === 'available' ? 'badge-success' : room.status === 'occupied' ? 'badge-danger' : 'badge-warning'">
+                {{ room.status }}
+              </span>
+            </td>
+            <td>{{ room.lastCleaned }}</td>
+            <td>
+              <div class="flex gap-2">
+                <button class="btn-ghost text-xs px-2 py-1">Edit</button>
+                <button class="btn-ghost text-xs px-2 py-1 text-red-400">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add Room Modal (simplified) -->
+    <div v-if="showAddModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" @click.self="showAddModal = false">
+      <div class="card max-w-md w-full mx-4">
+        <h2 class="text-xl font-semibold text-white mb-4">Add New Room</h2>
+        <form @submit.prevent="addRoom" class="space-y-4">
+          <div>
+            <label class="block text-sm text-gray-400 mb-2">Room Number</label>
+            <input type="text" class="input" placeholder="101" required />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-400 mb-2">Room Type</label>
+            <select class="input" required>
+              <option>Single</option>
+              <option>Double</option>
+              <option>Suite</option>
+              <option>Deluxe</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-400 mb-2">Price per Night</label>
+            <input type="number" class="input" placeholder="89" required />
+          </div>
+          <div class="flex gap-3">
+            <button type="submit" class="btn-primary">Add Room</button>
+            <button type="button" class="btn-secondary" @click="showAddModal = false">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: 'admin'
+})
+
+const showAddModal = ref(false)
+
+const rooms = ref([
+  { id: 1, number: '101', type: 'Single', floor: 1, price: 89, status: 'available', lastCleaned: '2 hours ago' },
+  { id: 2, number: '102', type: 'Double', floor: 1, price: 129, status: 'occupied', lastCleaned: '1 day ago' },
+  { id: 3, number: '103', type: 'Suite', floor: 1, price: 249, status: 'available', lastCleaned: '3 hours ago' },
+  { id: 4, number: '201', type: 'Deluxe', floor: 2, price: 189, status: 'maintenance', lastCleaned: '5 days ago' },
+  { id: 5, number: '202', type: 'Double', floor: 2, price: 129, status: 'occupied', lastCleaned: '2 days ago' },
+  { id: 6, number: '301', type: 'Suite', floor: 3, price: 249, status: 'available', lastCleaned: '1 hour ago' },
+])
+
+const addRoom = () => {
+  // Connect to Neon DB
+  showAddModal.value = false
+  alert('Room added! (Connect to Neon DB)')
+}
+</script>

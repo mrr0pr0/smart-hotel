@@ -1,4 +1,3 @@
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
@@ -25,7 +24,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Private keys (server-side only)
-    apiSecret: '',
+    databaseUrl: process.env.DATABASE_URL,
+    apiSecret: process.env.API_SECRET,
 
     // Public keys (exposed to client)
     public: {
@@ -38,5 +38,12 @@ export default defineNuxtConfig({
     '/staff/**': { ssr: false },
   },
 
-  compatibilityDate: '2024-01-27'
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+
+  compatibilityDate: '2026-01-29'
 })
