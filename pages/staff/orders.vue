@@ -2,8 +2,8 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Staff - Order Management</h1>
-      <p class="text-gray-400">Manage assigned orders and tasks</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Personal - Ordrestyring</h1>
+      <p class="text-gray-400">Administrer tildelte ordrer og oppgaver</p>
     </div>
 
     <!-- Status Tabs -->
@@ -43,14 +43,14 @@
 
         <div class="border-t border-[#2a2a2a] pt-4 flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-400">Assigned to</p>
+            <p class="text-sm text-gray-400">Tildelt til</p>
             <p class="text-white font-medium">{{ order.assignedTo }}</p>
           </div>
           <div class="flex gap-2">
             <button class="btn-primary text-sm px-3 py-1" @click="updateOrderStatus(order.id)">
-              Mark as {{ getNextStatus(order.status) }}
+              Merk som {{ getNextStatus(order.status) }}
             </button>
-            <button class="btn-ghost text-sm px-3 py-1">Details</button>
+            <button class="btn-ghost text-sm px-3 py-1">Detaljer</button>
           </div>
         </div>
       </div>
@@ -63,41 +63,41 @@ definePageMeta({
   layout: 'staff'
 })
 
-const activeStatus = ref('All')
-const statuses = ['All', 'Pending', 'In Progress', 'Completed']
+const activeStatus = ref('Alle')
+const statuses = ['Alle', 'Venter', 'Pågår', 'Ferdig']
 
 const orders = ref([
   {
     id: '701',
-    type: 'Room Service',
-    location: 'Room 301',
-    status: 'Pending',
-    time: '5 min ago',
-    assignedTo: 'You',
+    type: 'Romservice',
+    location: 'Rom 301',
+    status: 'Venter',
+    time: '5 min siden',
+    assignedTo: 'Du',
     items: [
-      { name: 'Breakfast Set', qty: 1, price: 24.99 },
-      { name: 'Orange Juice', qty: 2, price: 9.98 }
+      { name: 'Frokostsett', qty: 1, price: 24.99 },
+      { name: 'Appelsinjuice', qty: 2, price: 9.98 }
     ]
   },
   {
     id: '702',
     type: 'Restaurant',
-    location: 'Table 12',
-    status: 'In Progress',
-    time: '15 min ago',
-    assignedTo: 'You',
+    location: 'Bord 12',
+    status: 'Pågår',
+    time: '15 min siden',
+    assignedTo: 'Du',
     items: [
       { name: 'Steak', qty: 2, price: 69.98 },
-      { name: 'Wine', qty: 1, price: 35.99 }
+      { name: 'Vin', qty: 1, price: 35.99 }
     ]
   },
   {
     id: '703',
-    type: 'Room Service',
-    location: 'Room 205',
-    status: 'Completed',
-    time: '1 hour ago',
-    assignedTo: 'You',
+    type: 'Romservice',
+    location: 'Rom 205',
+    status: 'Ferdig',
+    time: '1 time siden',
+    assignedTo: 'Du',
     items: [
       { name: 'Club Sandwich', qty: 1, price: 15.99 }
     ]
@@ -105,26 +105,26 @@ const orders = ref([
 ])
 
 const filteredOrders = computed(() => {
-  if (activeStatus.value === 'All') return orders.value
+  if (activeStatus.value === 'Alle') return orders.value
   return orders.value.filter(order => order.status === activeStatus.value)
 })
 
 const getStatusBadge = (status: string) => {
   const badges: Record<string, string> = {
-    'Pending': 'badge-warning',
-    'In Progress': 'badge-info',
-    'Completed': 'badge-success'
+    'Venter': 'badge-warning',
+    'Pågår': 'badge-info',
+    'Ferdig': 'badge-success'
   }
   return badges[status] || 'badge-info'
 }
 
 const getNextStatus = (currentStatus: string) => {
   const statusFlow: Record<string, string> = {
-    'Pending': 'In Progress',
-    'In Progress': 'Completed',
-    'Completed': 'Completed'
+    'Venter': 'Pågår',
+    'Pågår': 'Ferdig',
+    'Ferdig': 'Ferdig'
   }
-  return statusFlow[currentStatus] || 'Completed'
+  return statusFlow[currentStatus] || 'Ferdig'
 }
 
 const updateOrderStatus = (orderId: string) => {

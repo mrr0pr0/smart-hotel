@@ -3,29 +3,29 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 class="text-3xl font-bold text-white mb-2">Rooms</h1>
-        <p class="text-gray-400">Manage all hotel rooms</p>
+        <h1 class="text-3xl font-bold text-white mb-2">Rom</h1>
+        <p class="text-gray-400">Administrer alle hotellrom</p>
       </div>
-      <button class="btn-primary">Add New Room</button>
+      <button class="btn-primary">Legg til nytt rom</button>
     </div>
 
     <!-- Filters -->
     <div class="card mb-6">
       <div class="flex gap-4">
         <select class="input flex-1">
-          <option>All Rooms</option>
-          <option>Available</option>
-          <option>Occupied</option>
-          <option>Maintenance</option>
+          <option>Alle rom</option>
+          <option>Tilgjengelig</option>
+          <option>Opptatt</option>
+          <option>Vedlikehold</option>
         </select>
         <select class="input flex-1">
-          <option>All Types</option>
-          <option>Single</option>
-          <option>Double</option>
+          <option>Alle typer</option>
+          <option>Enkeltrom</option>
+          <option>Dobbeltrom</option>
           <option>Suite</option>
           <option>Deluxe</option>
         </select>
-        <input type="text" class="input flex-1" placeholder="Search rooms..." />
+        <input type="text" class="input flex-1" placeholder="Søk i rom..." />
       </div>
     </div>
 
@@ -40,7 +40,7 @@
 
         <div class="flex items-start justify-between mb-3">
           <div>
-            <h3 class="text-lg font-semibold text-white">Room {{ room.number }}</h3>
+            <h3 class="text-lg font-semibold text-white">Rom {{ room.number }}</h3>
             <p class="text-sm text-gray-400">{{ room.type }}</p>
           </div>
           <span :class="room.status === 'available' ? 'badge-success' : room.status === 'occupied' ? 'badge-danger' : 'badge-warning'">
@@ -50,7 +50,7 @@
 
         <div class="flex items-center justify-between">
           <p class="text-2xl font-bold text-white">${{ room.price }}</p>
-          <button class="btn-primary btn text-sm px-3 py-1">View Details</button>
+          <button class="btn-primary btn text-sm px-3 py-1">Vis detaljer</button>
         </div>
       </div>
     </div>

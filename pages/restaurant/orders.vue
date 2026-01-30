@@ -2,8 +2,8 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Restaurant Orders</h1>
-      <p class="text-gray-400">Manage and track all restaurant orders</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Restaurantbestillinger</h1>
+      <p class="text-gray-400">Administrer og spor alle restaurantbestillinger</p>
     </div>
 
     <!-- Status Filters -->
@@ -25,8 +25,8 @@
       <div v-for="order in filteredOrders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-4">
           <div>
-            <h3 class="text-lg font-semibold text-white">Order #{{ order.id }}</h3>
-            <p class="text-sm text-gray-400">Table {{ order.table }}</p>
+            <h3 class="text-lg font-semibold text-white">Bestilling #{{ order.id }}</h3>
+            <p class="text-sm text-gray-400">Bord {{ order.table }}</p>
             <p class="text-xs text-gray-500">{{ order.time }}</p>
           </div>
           <span :class="getStatusBadge(order.status)">
@@ -47,7 +47,7 @@
             <span class="text-sm text-gray-400">{{ order.customer }}</span>
           </div>
           <button class="btn-primary w-full text-sm" @click="updateStatus(order.id)">
-            Update Status
+            Oppdater Status
           </button>
         </div>
       </div>

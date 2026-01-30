@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 class="text-3xl font-bold text-white mb-2">Bookings</h1>
-        <p class="text-gray-400">Manage all reservations</p>
+        <h1 class="text-3xl font-bold text-white mb-2">Reservasjoner</h1>
+        <p class="text-gray-400">Administrer alle reservasjoner</p>
       </div>
-      <NuxtLink to="/bookings/new" class="btn-primary">New Booking</NuxtLink>
+      <NuxtLink to="/bookings/new" class="btn-primary">Ny Reservasjon</NuxtLink>
     </div>
 
     <!-- Bookings Table -->
@@ -14,20 +14,20 @@
       <table class="table">
         <thead>
         <tr>
-          <th>Booking ID</th>
-          <th>Guest Name</th>
-          <th>Room</th>
-          <th>Check-in</th>
-          <th>Check-out</th>
+          <th>Reservasjons-ID</th>
+          <th>Gastnavn</th>
+          <th>Rom</th>
+          <th>Innsjekk</th>
+          <th>Utsjekk</th>
           <th>Status</th>
-          <th>Actions</th>
+          <th>Handlinger</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="booking in bookings" :key="booking.id">
           <td class="font-mono text-sm">#{{ booking.id }}</td>
           <td>{{ booking.guest }}</td>
-          <td>Room {{ booking.room }}</td>
+          <td>Rom {{ booking.room }}</td>
           <td>{{ booking.checkIn }}</td>
           <td>{{ booking.checkOut }}</td>
           <td>
@@ -36,7 +36,7 @@
               </span>
           </td>
           <td>
-            <button class="btn-ghost text-xs px-2 py-1">View</button>
+            <button class="btn-ghost text-xs px-2 py-1">Vis</button>
           </td>
         </tr>
         </tbody>

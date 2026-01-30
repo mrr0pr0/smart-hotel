@@ -2,8 +2,8 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
-      <p class="text-gray-400">Welcome back! Here's what's happening today.</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Dashbord</h1>
+      <p class="text-gray-400">Velkommen tilbake! Her er hva som skjer i dag.</p>
     </div>
 
     <!-- Stats Grid -->
@@ -17,7 +17,7 @@
           </div>
           <span class="badge-success">+12%</span>
         </div>
-        <h3 class="text-gray-400 text-sm mb-1">Total Rooms</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Totalt Rom</h3>
         <p class="text-3xl font-bold text-white">156</p>
       </div>
 
@@ -28,9 +28,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <span class="badge-success">Available</span>
+          <span class="badge-success">Tilgjengelig</span>
         </div>
-        <h3 class="text-gray-400 text-sm mb-1">Occupied Rooms</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Opptatte Rom</h3>
         <p class="text-3xl font-bold text-white">92</p>
       </div>
 
@@ -41,9 +41,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <span class="badge-warning">Pending</span>
+          <span class="badge-warning">Venter</span>
         </div>
-        <h3 class="text-gray-400 text-sm mb-1">Today's Bookings</h3>
+        <h3 class="text-gray-400 text-sm mb-1\">Dagens Reservasjoner</h3>
         <p class="text-3xl font-bold text-white">24</p>
       </div>
 
@@ -56,7 +56,7 @@
           </div>
           <span class="badge-success">+8%</span>
         </div>
-        <h3 class="text-gray-400 text-sm mb-1">Today's Revenue</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Dagens Inntekter</h3>
         <p class="text-3xl font-bold text-white">$12,450</p>
       </div>
     </div>
@@ -65,7 +65,7 @@
     <div class="grid lg:grid-cols-2 gap-6">
       <!-- Recent Bookings -->
       <div class="card">
-        <h2 class="text-xl font-semibold text-white mb-4">Recent Bookings</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Nylige Reservasjoner</h2>
         <div class="space-y-3">
           <div v-for="i in 5" :key="i" class="flex items-center justify-between p-3 bg-[#111111] rounded-lg">
             <div class="flex items-center gap-3">
@@ -74,22 +74,22 @@
               </div>
               <div>
                 <p class="text-sm font-medium text-white">John Doe</p>
-                <p class="text-xs text-gray-500">Room 301 - Suite</p>
+                <p class="text-xs text-gray-500">Rom 301 - Suite</p>
               </div>
             </div>
-            <span class="badge-success">Active</span>
+            <span class="badge-success">Aktiv</span>
           </div>
         </div>
       </div>
 
       <!-- Quick Actions -->
       <div class="card">
-        <h2 class="text-xl font-semibold text-white mb-4">Quick Actions</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Rask Handling</h2>
         <div class="grid grid-cols-2 gap-3">
-          <NuxtLink to="/bookings/new" class="btn-primary text-center">New Booking</NuxtLink>
-          <NuxtLink to="/rooms" class="btn-secondary text-center">Manage Rooms</NuxtLink>
-          <NuxtLink to="/restaurant" class="btn-accent text-center">Restaurant Orders</NuxtLink>
-          <NuxtLink to="/room-service" class="btn-ghost text-center">Room Service</NuxtLink>
+          <NuxtLink to="/bookings/new" class="btn-primary text-center">Ny Reservasjon</NuxtLink>
+          <NuxtLink to="/rooms" class="btn-secondary text-center">Administrer Rom</NuxtLink>
+          <NuxtLink to="/restaurant" class="btn-accent text-center">Restaurantbestillinger</NuxtLink>
+          <NuxtLink to="/room-service" class="btn-ghost text-center">Romservice</NuxtLink>
         </div>
       </div>
     </div>

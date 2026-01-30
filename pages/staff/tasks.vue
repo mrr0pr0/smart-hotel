@@ -2,26 +2,26 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Staff - Task Management</h1>
-      <p class="text-gray-400">Your assigned tasks and responsibilities</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Personal - Oppgavestyring</h1>
+      <p class="text-gray-400">Dine tildelte oppgaver og ansvarsområder</p>
     </div>
 
     <!-- Task Stats -->
     <div class="grid md:grid-cols-4 gap-6 mb-8">
       <div class="card">
-        <h3 class="text-gray-400 text-sm mb-1">Total Tasks</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Totale oppgaver</h3>
         <p class="text-3xl font-bold text-white">12</p>
       </div>
       <div class="card">
-        <h3 class="text-gray-400 text-sm mb-1">Pending</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Venter</h3>
         <p class="text-3xl font-bold text-yellow-400">5</p>
       </div>
       <div class="card">
-        <h3 class="text-gray-400 text-sm mb-1">In Progress</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Pågår</h3>
         <p class="text-3xl font-bold text-blue-400">4</p>
       </div>
       <div class="card">
-        <h3 class="text-gray-400 text-sm mb-1">Completed</h3>
+        <h3 class="text-gray-400 text-sm mb-1">Ferdig</h3>
         <p class="text-3xl font-bold text-green-400">3</p>
       </div>
     </div>
@@ -91,76 +91,76 @@ definePageMeta({
   layout: 'staff'
 })
 
-const activeFilter = ref('All')
-const filters = ['All', 'Pending', 'In Progress', 'Completed']
+const activeFilter = ref('Alle')
+const filters = ['Alle', 'Venter', 'Pågår', 'Ferdig']
 
 const tasks = ref([
   {
     id: 1,
-    title: 'Clean Room 301',
-    description: 'Deep cleaning required after checkout',
-    location: 'Floor 3',
-    priority: 'High',
-    status: 'Pending',
+    title: 'Rensk Rom 301',
+    description: 'Grundig rengjøring kreves etter utsjekk',
+    location: 'Etasje 3',
+    priority: 'Høy',
+    status: 'Venter',
     dueTime: '10:00 AM'
   },
   {
     id: 2,
-    title: 'Deliver Towels',
-    description: 'Extra towels requested for Room 205',
-    location: 'Floor 2',
+    title: 'Lever Håndklær',
+    description: 'Ekstra håndklær forespurt for Rom 205',
+    location: 'Etasje 2',
     priority: 'Medium',
-    status: 'In Progress',
+    status: 'Pågår',
     dueTime: '11:30 AM'
   },
   {
     id: 3,
-    title: 'Restock Minibar',
-    description: 'Restock minibar in Room 412',
-    location: 'Floor 4',
-    priority: 'Low',
-    status: 'Pending',
+    title: 'Fyll Minibar på nytt',
+    description: 'Fyll minibar i Rom 412',
+    location: 'Etasje 4',
+    priority: 'Lav',
+    status: 'Venter',
     dueTime: '2:00 PM'
   },
   {
     id: 4,
-    title: 'Fix AC Unit',
-    description: 'AC maintenance in Room 108',
-    location: 'Floor 1',
-    priority: 'High',
-    status: 'In Progress',
+    title: 'Reparer AC-enhet',
+    description: 'AC vedlikehold i Rom 108',
+    location: 'Etasje 1',
+    priority: 'Høy',
+    status: 'Pågår',
     dueTime: '12:00 PM'
   },
   {
     id: 5,
-    title: 'Prepare Room 215',
-    description: 'Setup room for VIP guest arrival',
-    location: 'Floor 2',
-    priority: 'High',
-    status: 'Completed',
+    title: 'Forbered Rom 215',
+    description: 'Klargjøring av rom til VIP-gjest ankomst',
+    location: 'Etasje 2',
+    priority: 'Høy',
+    status: 'Ferdig',
     dueTime: '9:00 AM'
   }
 ])
 
 const filteredTasks = computed(() => {
-  if (activeFilter.value === 'All') return tasks.value
+  if (activeFilter.value === 'Alle') return tasks.value
   return tasks.value.filter(task => task.status === activeFilter.value)
 })
 
 const getPriorityBadge = (priority: string) => {
   const badges: Record<string, string> = {
-    'High': 'badge-danger',
+    'Høy': 'badge-danger',
     'Medium': 'badge-warning',
-    'Low': 'badge-info'
+    'Lav': 'badge-info'
   }
   return badges[priority] || 'badge-info'
 }
 
 const getStatusBadge = (status: string) => {
   const badges: Record<string, string> = {
-    'Pending': 'badge-warning',
-    'In Progress': 'badge-info',
-    'Completed': 'badge-success'
+    'Venter': 'badge-warning',
+    'Pågår': 'badge-info',
+    'Ferdig': 'badge-success'
   }
   return badges[status] || 'badge-info'
 }

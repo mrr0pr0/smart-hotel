@@ -2,20 +2,20 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Statistics & Analytics</h1>
-      <p class="text-gray-400">Detailed performance metrics and insights</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Statistikk og Analyse</h1>
+      <p class="text-gray-400">Detaljerte ytelsesmålinger og innsikter</p>
     </div>
 
     <!-- Date Range Filter -->
     <div class="card mb-6">
       <div class="flex gap-4 items-center">
-        <label class="text-sm text-gray-400">Date Range:</label>
+        <label class="text-sm text-gray-400">Datoområde:</label>
         <select class="input flex-1 max-w-xs">
-          <option>Last 7 Days</option>
-          <option>Last 30 Days</option>
-          <option>Last 3 Months</option>
-          <option>Last Year</option>
-          <option>Custom Range</option>
+          <option>Siste 7 Dager</option>
+          <option>Siste 30 Dager</option>
+          <option>Siste 3 Måneder</option>
+          <option>Siste År</option>
+          <option>Egendefinert Område</option>
         </select>
       </div>
     </div>
@@ -24,54 +24,54 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="card">
         <div class="flex items-center justify-between mb-2">
-          <h3 class="text-gray-400 text-sm">Total Revenue</h3>
+          <h3 class="text-gray-400 text-sm">Totalinntekt</h3>
           <span class="badge-success">+18%</span>
         </div>
         <p class="text-3xl font-bold text-white mb-1">$245,890</p>
-        <p class="text-xs text-gray-500">vs last period: $208,210</p>
+        <p class="text-xs text-gray-500">vs forrige periode: $208,210</p>
       </div>
 
       <div class="card">
         <div class="flex items-center justify-between mb-2">
-          <h3 class="text-gray-400 text-sm">Avg Occupancy</h3>
+          <h3 class="text-gray-400 text-sm">Gjennomsnittlig Occupancy</h3>
           <span class="badge-success">+5%</span>
         </div>
         <p class="text-3xl font-bold text-white mb-1">78.5%</p>
-        <p class="text-xs text-gray-500">vs last period: 74.2%</p>
+        <p class="text-xs text-gray-500">vs forrige periode: 74.2%</p>
       </div>
 
       <div class="card">
         <div class="flex items-center justify-between mb-2">
-          <h3 class="text-gray-400 text-sm">Total Bookings</h3>
+          <h3 class="text-gray-400 text-sm">Totalt Reservasjoner</h3>
           <span class="badge-success">+12%</span>
         </div>
         <p class="text-3xl font-bold text-white mb-1">1,248</p>
-        <p class="text-xs text-gray-500">vs last period: 1,114</p>
+        <p class="text-xs text-gray-500">vs forrige periode: 1,114</p>
       </div>
 
       <div class="card">
         <div class="flex items-center justify-between mb-2">
-          <h3 class="text-gray-400 text-sm">Avg Stay Duration</h3>
-          <span class="badge-info">Stable</span>
+          <h3 class="text-gray-400 text-sm">Gjennomsnittlig Oppholdsvarighet</h3>
+          <span class="badge-info">Stabil</span>
         </div>
-        <p class="text-3xl font-bold text-white mb-1">3.2 days</p>
-        <p class="text-xs text-gray-500">vs last period: 3.1 days</p>
+        <p class="text-3xl font-bold text-white mb-1">3.2 dager</p>
+        <p class="text-xs text-gray-500">vs forrige periode: 3.1 dager</p>
       </div>
     </div>
 
     <!-- Charts -->
     <div class="grid lg:grid-cols-2 gap-6 mb-8">
       <div class="card">
-        <h2 class="text-xl font-semibold text-white mb-4">Revenue Trend</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Inntektsutvikling</h2>
         <div class="h-80 bg-[#111111] rounded-lg flex items-center justify-center">
-          <p class="text-gray-500">Chart.js integration point</p>
+          <p class="text-gray-500">Chart.js integrasjonspunkt</p>
         </div>
       </div>
 
       <div class="card">
-        <h2 class="text-xl font-semibold text-white mb-4">Occupancy Rate</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Occupancyrate</h2>
         <div class="h-80 bg-[#111111] rounded-lg flex items-center justify-center">
-          <p class="text-gray-500">Chart.js integration point</p>
+          <p class="text-gray-500">Chart.js integrasjonspunkt</p>
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
     <div class="grid lg:grid-cols-2 gap-6">
       <!-- Revenue by Room Type -->
       <div class="card">
-        <h2 class="text-xl font-semibold text-white mb-4">Revenue by Room Type</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Inntekt etter Romtype</h2>
         <div class="space-y-4">
           <div v-for="type in roomTypes" :key="type.name" class="flex items-center justify-between">
             <div class="flex-1">
@@ -98,12 +98,12 @@
 
       <!-- Top Performing Months -->
       <div class="card">
-        <h2 class="text-xl font-semibold text-white mb-4">Monthly Performance</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Månedsytelse</h2>
         <div class="space-y-3">
           <div v-for="month in months" :key="month.name" class="flex items-center justify-between p-3 bg-[#111111] rounded-lg">
             <div>
               <p class="font-semibold text-white">{{ month.name }}</p>
-              <p class="text-xs text-gray-400">{{ month.bookings }} bookings</p>
+              <p class="text-xs text-gray-400">{{ month.bookings }} reservasjoner</p>
             </div>
             <div class="text-right">
               <p class="font-semibold text-white">${{ month.revenue.toLocaleString() }}</p>

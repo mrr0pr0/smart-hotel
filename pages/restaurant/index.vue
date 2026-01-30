@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-white mb-2">Restaurant</h1>
-      <p class="text-gray-400">Manage restaurant orders and menu</p>
+      <p class="text-gray-400">Administrer restaurantbestillinger og meny</p>
     </div>
 
     <div class="grid lg:grid-cols-3 gap-6">
@@ -32,7 +32,7 @@
                 <p class="text-xs text-gray-400 mb-2">{{ item.description }}</p>
                 <div class="flex items-center justify-between">
                   <span class="text-lg font-bold text-white">${{ item.price }}</span>
-                  <button class="btn-primary text-xs px-2 py-1">Add to Order</button>
+                  <button class="btn-primary text-xs px-2 py-1">Legg til Bestilling</button>
                 </div>
               </div>
             </div>
@@ -42,17 +42,17 @@
 
       <!-- Current Order -->
       <div class="card h-fit sticky top-8">
-        <h2 class="text-xl font-semibold text-white mb-4">Current Order</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Gjeldende Bestilling</h2>
         <div class="space-y-3 mb-6">
-          <p class="text-sm text-gray-400 text-center py-8">No items added yet</p>
+          <p class="text-sm text-gray-400 text-center py-8">Ingen varer lagt til ennå</p>
         </div>
         <div class="border-t border-[#2a2a2a] pt-4 space-y-2">
           <div class="flex justify-between text-gray-400">
-            <span>Subtotal</span>
+            <span>Mellomsum</span>
             <span>$0.00</span>
           </div>
           <div class="flex justify-between text-gray-400">
-            <span>Tax (10%)</span>
+            <span>Moms (10%)</span>
             <span>$0.00</span>
           </div>
           <div class="flex justify-between text-white text-lg font-bold pt-2 border-t border-[#2a2a2a]">
@@ -60,7 +60,7 @@
             <span>$0.00</span>
           </div>
         </div>
-        <button class="btn-primary w-full mt-4">Place Order</button>
+        <button class="btn-primary w-full mt-4">Plasser Bestilling</button>
       </div>
     </div>
   </div>

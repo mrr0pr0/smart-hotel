@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 class="text-3xl font-bold text-white mb-2">Menu Management</h1>
-        <p class="text-gray-400">Manage restaurant menu items</p>
+        <h1 class="text-3xl font-bold text-white mb-2">Menystyring</h1>
+        <p class="text-gray-400">Administrer restaurantmenyelementer</p>
       </div>
-      <button class="btn-primary" @click="showAddModal = true">Add Menu Item</button>
+      <button class="btn-primary" @click="showAddModal = true">Legg Til Menyelement</button>
     </div>
 
     <!-- Category Tabs -->
@@ -38,15 +38,15 @@
             <p class="text-sm text-gray-400">{{ item.description }}</p>
           </div>
           <span :class="item.available ? 'badge-success' : 'badge-danger'">
-            {{ item.available ? 'Available' : 'Out of Stock' }}
+            {{ item.available ? 'Tilgjengelig' : 'Utsolgt' }}
           </span>
         </div>
 
         <div class="flex items-center justify-between">
           <p class="text-2xl font-bold text-white">${{ item.price }}</p>
           <div class="flex gap-2">
-            <button class="btn-ghost text-sm px-2 py-1">Edit</button>
-            <button class="btn-ghost text-sm px-2 py-1 text-red-400">Delete</button>
+            <button class="btn-ghost text-sm px-2 py-1">Rediger</button>
+            <button class="btn-ghost text-sm px-2 py-1 text-red-400">Slett</button>
           </div>
         </div>
       </div>
@@ -55,33 +55,33 @@
     <!-- Add Item Modal -->
     <div v-if="showAddModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" @click.self="showAddModal = false">
       <div class="card max-w-md w-full mx-4">
-        <h2 class="text-xl font-semibold text-white mb-4">Add Menu Item</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Legg Til Menyelement</h2>
         <form @submit.prevent="addItem" class="space-y-4">
           <div>
-            <label class="block text-sm text-gray-400 mb-2">Item Name</label>
-            <input type="text" class="input" placeholder="Grilled Salmon" required />
+            <label class="block text-sm text-gray-400 mb-2">Varennavn</label>
+            <input type="text" class="input" placeholder="Grillet Laks" required />
           </div>
           <div>
-            <label class="block text-sm text-gray-400 mb-2">Description</label>
-            <textarea class="input" rows="2" placeholder="Fresh Atlantic salmon..." required></textarea>
+            <label class="block text-sm text-gray-400 mb-2">Beskrivelse</label>
+            <textarea class="input" rows="2" placeholder="Fersk atlantisk laks..." required></textarea>
           </div>
           <div>
-            <label class="block text-sm text-gray-400 mb-2">Category</label>
+            <label class="block text-sm text-gray-400 mb-2">Kategori</label>
             <select class="input" required>
-              <option>Breakfast</option>
-              <option>Lunch</option>
-              <option>Dinner</option>
-              <option>Drinks</option>
-              <option>Desserts</option>
+              <option>Frokost</option>
+              <option>Lunsj</option>
+              <option>Middag</option>
+              <option>Drikke</option>
+              <option>Dessert</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm text-gray-400 mb-2">Price</label>
+            <label class="block text-sm text-gray-400 mb-2">Pris</label>
             <input type="number" class="input" placeholder="24.99" step="0.01" required />
           </div>
           <div class="flex gap-3">
-            <button type="submit" class="btn-primary">Add Item</button>
-            <button type="button" class="btn-secondary" @click="showAddModal = false">Cancel</button>
+            <button type="submit" class="btn-primary">Legg til Vare</button>
+            <button type="button" class="btn-secondary" @click="showAddModal = false">Avbryt</button>
           </div>
         </form>
       </div>

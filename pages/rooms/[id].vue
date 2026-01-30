@@ -5,7 +5,7 @@
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
-      Back to Rooms
+      Tilbake til Rom
     </NuxtLink>
 
     <div class="grid lg:grid-cols-3 gap-6">
@@ -33,13 +33,13 @@
 
           <div class="flex items-center gap-4">
             <div class="text-3xl font-bold text-white">${{ room.price }}</div>
-            <span class="text-gray-400">per night</span>
+            <span class="text-gray-400">per natt</span>
           </div>
         </div>
 
         <!-- Room Features -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Room Features</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Rom Funksjoner</h2>
           <div class="grid md:grid-cols-2 gap-4">
             <div v-for="feature in room.features" :key="feature" class="flex items-center gap-3">
               <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,14 +52,14 @@
 
         <!-- Booking History -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Recent Bookings</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Nylige Reservasjoner</h2>
           <div class="space-y-3">
             <div v-for="booking in room.bookings" :key="booking.id" class="flex items-center justify-between p-3 bg-[#111111] rounded-lg">
               <div>
                 <p class="font-medium text-white">{{ booking.guest }}</p>
                 <p class="text-sm text-gray-400">{{ booking.dates }}</p>
               </div>
-              <span class="badge-info">{{ booking.nights }} nights</span>
+              <span class="badge-info">{{ booking.nights }} netter</span>
             </div>
           </div>
         </div>
@@ -69,37 +69,37 @@
       <div class="space-y-6">
         <!-- Quick Actions -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Quick Actions</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Rask Handling</h2>
           <div class="space-y-3">
-            <button class="btn-primary w-full">Book Room</button>
-            <button class="btn-secondary w-full">Mark as Maintenance</button>
-            <button class="btn-secondary w-full">View Schedule</button>
-            <button class="btn-ghost w-full">Edit Details</button>
+            <button class="btn-primary w-full">Booking Rom</button>
+            <button class="btn-secondary w-full">Merk som vedlikehold</button>
+            <button class="btn-secondary w-full">Vis tidsplan</button>
+            <button class="btn-ghost w-full">Rediger detaljer</button>
           </div>
         </div>
 
         <!-- Room Info -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Room Information</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Rom Informasjon</h2>
           <div class="space-y-3">
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Floor</span>
+              <span class="text-gray-400">Etasje</span>
               <span class="text-white">{{ room.floor }}</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Capacity</span>
-              <span class="text-white">{{ room.capacity }} guests</span>
+              <span class="text-gray-400">Kapasitet</span>
+              <span class="text-white">{{ room.capacity }} gjester</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Size</span>
-              <span class="text-white">{{ room.size }} sq ft</span>
+              <span class="text-gray-400">Størrelse</span>
+              <span class="text-white">{{ room.size }} kvm</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">View</span>
+              <span class="text-gray-400">Utsikt</span>
               <span class="text-white">{{ room.view }}</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Last Cleaned</span>
+              <span class="text-gray-400">Sist renset</span>
               <span class="text-white">{{ room.lastCleaned }}</span>
             </div>
           </div>

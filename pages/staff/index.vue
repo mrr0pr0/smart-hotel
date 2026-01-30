@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 class="text-3xl font-bold text-white mb-2">Staff Management</h1>
-        <p class="text-gray-400">Manage hotel staff and shifts</p>
+        <h1 class="text-3xl font-bold text-white mb-2">Personalstyring</h1>
+        <p class="text-gray-400">Administrer hotellpersonalet og skift</p>
       </div>
-      <button class="btn-primary">Add Staff Member</button>
+      <button class="btn-primary">Legg til personalet</button>
     </div>
 
     <!-- Staff List -->
@@ -14,12 +14,12 @@
       <table class="table">
         <thead>
         <tr>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Department</th>
+          <th>Navn</th>
+          <th>Rolle</th>
+          <th>Avdeling</th>
           <th>Status</th>
-          <th>Shift</th>
-          <th>Actions</th>
+          <th>Skift</th>
+          <th>Handling</th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@
           </td>
           <td>{{ staff.shift }}</td>
           <td>
-            <button class="btn-ghost text-xs px-2 py-1">Edit</button>
+            <button class="btn-ghost text-xs px-2 py-1">Rediger</button>
           </td>
         </tr>
         </tbody>

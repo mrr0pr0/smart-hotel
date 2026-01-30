@@ -4,13 +4,13 @@
       <!-- Logo -->
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gradient mb-2">SmartStay</h1>
-        <p class="text-gray-400">Create your account</p>
+        <p class="text-gray-400">Opprett kontoen din</p>
       </div>
 
       <!-- Register Form -->
       <form @submit.prevent="handleRegister" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Fullt Navn</label>
           <input
               v-model="name"
               type="text"
@@ -21,7 +21,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+          <label class="block text-sm font-medium text-gray-300 mb-2">E-post</label>
           <input
               v-model="email"
               type="email"
@@ -32,7 +32,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Passord</label>
           <input
               v-model="password"
               type="password"
@@ -43,7 +43,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Bekreft Passord</label>
           <input
               v-model="confirmPassword"
               type="password"
@@ -53,14 +53,14 @@
           />
         </div>
 
-        <button type="submit" class="btn-primary w-full">Create Account</button>
+        <button type="submit" class="btn-primary w-full">Opprett Konto</button>
       </form>
 
       <!-- Login Link -->
       <div class="mt-6 text-center">
         <p class="text-sm text-gray-400">
-          Already have an account?
-          <NuxtLink to="/login" class="text-primary-400 hover:text-primary-300">Sign in</NuxtLink>
+          Har du allerede en konto?
+          <NuxtLink to="/login" class="text-primary-400 hover:text-primary-300">Logg inn</NuxtLink>
         </p>
       </div>
     </div>
@@ -79,7 +79,7 @@ const confirmPassword = ref('')
 
 const handleRegister = () => {
   if (password.value !== confirmPassword.value) {
-    alert('Passwords do not match!')
+    alert('Passord samsvarer ikke!')
     return
   }
   // TODO: Implement register logic

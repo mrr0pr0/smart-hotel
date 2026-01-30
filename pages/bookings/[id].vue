@@ -5,7 +5,7 @@
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
-      Back to Bookings
+      Tilbake til Reservasjoner
     </NuxtLink>
 
     <div class="grid lg:grid-cols-3 gap-6">
@@ -15,8 +15,8 @@
         <div class="card">
           <div class="flex items-start justify-between mb-4">
             <div>
-              <h1 class="text-3xl font-bold text-white mb-2">Booking #{{ booking.id }}</h1>
-              <p class="text-gray-400">Created on {{ booking.createdAt }}</p>
+              <h1 class="text-3xl font-bold text-white mb-2">Reservasjon #{{ booking.id }}</h1>
+              <p class="text-gray-400">Opprettet {{ booking.createdAt }}</p>
             </div>
             <span :class="booking.status === 'confirmed' ? 'badge-success' : booking.status === 'pending' ? 'badge-warning' : 'badge-info'">
               {{ booking.status }}
@@ -26,66 +26,66 @@
 
         <!-- Guest Information -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Guest Information</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Gastinformasjon</h2>
           <div class="grid md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Full Name</label>
+              <label class="block text-sm text-gray-400 mb-1">Fullt Navn</label>
               <p class="text-white">{{ booking.guest.name }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Email</label>
+              <label class="block text-sm text-gray-400 mb-1">E-post</label>
               <p class="text-white">{{ booking.guest.email }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Phone</label>
+              <label class="block text-sm text-gray-400 mb-1">Telefon</label>
               <p class="text-white">{{ booking.guest.phone }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Number of Guests</label>
-              <p class="text-white">{{ booking.guests }} guests</p>
+              <label class="block text-sm text-gray-400 mb-1">Antall Gjester</label>
+              <p class="text-white">{{ booking.guests }} gjester</p>
             </div>
           </div>
         </div>
 
         <!-- Booking Details -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Booking Details</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Reservasjonsdetaljer</h2>
           <div class="grid md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Room Number</label>
+              <label class="block text-sm text-gray-400 mb-1">Romnummer</label>
               <p class="text-white">{{ booking.room.number }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Room Type</label>
+              <label class="block text-sm text-gray-400 mb-1">Romtype</label>
               <p class="text-white">{{ booking.room.type }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Check-in Date</label>
+              <label class="block text-sm text-gray-400 mb-1">Innsjekk Dato</label>
               <p class="text-white">{{ booking.checkIn }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Check-out Date</label>
+              <label class="block text-sm text-gray-400 mb-1">Utsjekk Dato</label>
               <p class="text-white">{{ booking.checkOut }}</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Number of Nights</label>
-              <p class="text-white">{{ booking.nights }} nights</p>
+              <label class="block text-sm text-gray-400 mb-1">Antall Netter</label>
+              <p class="text-white">{{ booking.nights }} netter</p>
             </div>
             <div>
-              <label class="block text-sm text-gray-400 mb-1">Rate per Night</label>
+              <label class="block text-sm text-gray-400 mb-1">Sats per Natt</label>
               <p class="text-white">${{ booking.room.price }}</p>
             </div>
           </div>
 
           <div v-if="booking.specialRequests" class="mt-4">
-            <label class="block text-sm text-gray-400 mb-1">Special Requests</label>
+            <label class="block text-sm text-gray-400 mb-1">Spesielle Ønsker</label>
             <p class="text-white">{{ booking.specialRequests }}</p>
           </div>
         </div>
 
         <!-- Activity Log -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Activity Log</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Aktivitetslogg</h2>
           <div class="space-y-3">
             <div v-for="activity in booking.activities" :key="activity.id" class="flex gap-4">
               <div class="w-2 h-2 bg-primary-600 rounded-full mt-2"></div>
@@ -102,18 +102,18 @@
       <div class="space-y-6">
         <!-- Payment Summary -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Payment Summary</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Betalingssammendrag</h2>
           <div class="space-y-3">
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Room Rate ({{ booking.nights }} nights)</span>
+              <span class="text-gray-400">Romsats ({{ booking.nights }} netter)</span>
               <span class="text-white">${{ booking.payment.roomRate }}</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Tax (10%)</span>
+              <span class="text-gray-400">Moms (10%)</span>
               <span class="text-white">${{ booking.payment.tax }}</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Service Fee</span>
+              <span class="text-gray-400">Serviceavgift</span>
               <span class="text-white">${{ booking.payment.serviceFee }}</span>
             </div>
             <div class="border-t border-[#2a2a2a] pt-3 flex justify-between">
@@ -121,11 +121,11 @@
               <span class="text-lg font-bold text-white">${{ booking.payment.total }}</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Paid</span>
+              <span class="text-gray-400">Betalt</span>
               <span class="text-green-400">${{ booking.payment.paid }}</span>
             </div>
             <div class="flex justify-between text-sm">
-              <span class="text-gray-400">Balance</span>
+              <span class="text-gray-400">Saldo</span>
               <span class="text-yellow-400">${{ booking.payment.balance }}</span>
             </div>
           </div>
@@ -133,12 +133,12 @@
 
         <!-- Actions -->
         <div class="card">
-          <h2 class="text-xl font-semibold text-white mb-4">Actions</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">Handlinger</h2>
           <div class="space-y-3">
-            <button class="btn-primary w-full">Check In</button>
-            <button class="btn-secondary w-full">Modify Booking</button>
-            <button class="btn-secondary w-full">Send Confirmation</button>
-            <button class="btn-ghost w-full text-red-400">Cancel Booking</button>
+            <button class="btn-primary w-full">Innsjekk</button>
+            <button class="btn-secondary w-full">Endre Reservasjon</button>
+            <button class="btn-secondary w-full">Send Bekreftelse</button>
+            <button class="btn-ghost w-full text-red-400">Avbryt Reservasjon</button>
           </div>
         </div>
       </div>

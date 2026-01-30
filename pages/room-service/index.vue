@@ -2,8 +2,8 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Room Service</h1>
-      <p class="text-gray-400">Manage room service orders</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Romservice</h1>
+      <p class="text-gray-400">Administrer romservicebestillinger</p>
     </div>
 
     <!-- Active Orders -->
@@ -11,8 +11,8 @@
       <div v-for="order in orders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-4">
           <div>
-            <h3 class="text-lg font-semibold text-white">Room {{ order.room }}</h3>
-            <p class="text-sm text-gray-400">Order #{{ order.id }}</p>
+            <h3 class="text-lg font-semibold text-white">Rom {{ order.room }}</h3>
+            <p class="text-sm text-gray-400">Bestilling #{{ order.id }}</p>
           </div>
           <span :class="order.status === 'pending' ? 'badge-warning' : order.status === 'preparing' ? 'badge-info' : 'badge-success'">
             {{ order.status }}
@@ -28,7 +28,7 @@
 
         <div class="border-t border-[#2a2a2a] pt-4 flex items-center justify-between">
           <span class="text-lg font-bold text-white">${{ order.total }}</span>
-          <button class="btn-primary text-sm px-3 py-1">Update Status</button>
+          <button class="btn-primary text-sm px-3 py-1">Oppdater Status</button>
         </div>
       </div>
     </div>

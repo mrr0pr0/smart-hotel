@@ -2,8 +2,8 @@
   <div class="p-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2">Track Room Service</h1>
-      <p class="text-gray-400">Real-time order tracking and updates</p>
+      <h1 class="text-3xl font-bold text-white mb-2">Spor Romservice</h1>
+      <p class="text-gray-400">Sanntidssporing av bestillinger og oppdateringer</p>
     </div>
 
     <!-- Search Order -->
@@ -12,10 +12,10 @@
         <input
           type="text"
           class="input flex-1"
-          placeholder="Enter order ID or room number..."
+          placeholder="Skriv inn bestillings-ID eller romnummer..."
           v-model="searchQuery"
         />
-        <button class="btn-primary">Search</button>
+        <button class="btn-primary">Søk</button>
       </div>
     </div>
 
@@ -24,8 +24,8 @@
       <div v-for="order in orders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-6">
           <div>
-            <h3 class="text-xl font-semibold text-white">Order #{{ order.id }}</h3>
-            <p class="text-gray-400">Room {{ order.room }} • {{ order.time }}</p>
+            <h3 class="text-xl font-semibold text-white">Bestilling #{{ order.id }}</h3>
+            <p class="text-gray-400">Rom {{ order.room }} • {{ order.time }}</p>
           </div>
           <span :class="getStatusBadge(order.status)">
             {{ order.status }}
@@ -70,7 +70,7 @@
 
         <!-- Order Items -->
         <div class="border-t border-[#2a2a2a] pt-4">
-          <h4 class="text-sm font-semibold text-white mb-3">Order Items</h4>
+          <h4 class="text-sm font-semibold text-white mb-3">Bestillingsvarer</h4>
           <div class="space-y-2">
             <div v-for="item in order.items" :key="item.name" class="flex justify-between text-sm">
               <span class="text-gray-400">{{ item.name }} × {{ item.qty }}</span>
@@ -85,8 +85,8 @@
 
         <!-- Actions -->
         <div class="flex gap-3 mt-4" v-if="order.status !== 'Delivered'">
-          <button class="btn-primary flex-1">Update Status</button>
-          <button class="btn-secondary">Contact Guest</button>
+          <button class="btn-primary flex-1">Oppdater Status</button>
+          <button class="btn-secondary">Kontakt Gjest</button>
         </div>
       </div>
     </div>
