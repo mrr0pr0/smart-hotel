@@ -7,6 +7,8 @@ export interface Room {
   capacity: number;
   size?: number;
   view?: string;
+  // optional image url used by UI components
+  image?: string;
   status: "available" | "occupied" | "maintenance";
   description?: string;
   features?: string;

@@ -6,6 +6,8 @@ export interface MenuItem {
   price: string;
   available: boolean;
   imageUrl?: string;
+  // alias used across components
+  image?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,14 +25,19 @@ export interface Order {
   type: "restaurant" | "room-service";
   location: string;
   roomId?: number;
+  // human-readable room number (optional)
+  roomNumber?: string;
   guestId?: number;
   status: "pending" | "preparing" | "ready" | "delivered" | "cancelled";
-  items: string;
+  // list of ordered items
+  items: OrderItem[];
   subtotal: string;
   tax: string;
   total: string;
   assignedTo?: number;
   notes?: string;
+  // special requests for room-service
+  specialRequests?: string;
   createdAt: Date;
   updatedAt: Date;
 }
