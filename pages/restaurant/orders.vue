@@ -21,7 +21,7 @@
     </div>
 
     <!-- Orders Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="filteredOrders.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="order in filteredOrders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-4">
           <div>
@@ -52,6 +52,8 @@
         </div>
       </div>
     </div>
+
+    <div v-else class="card text-center py-12">Ingen bestillinger funnet.</div>
   </div>
 </template>
 
@@ -60,58 +62,18 @@ definePageMeta({
   layout: 'default'
 })
 
+
 const activeStatus = ref('All')
 const statuses = ['All', 'Pending', 'Preparing', 'Ready', 'Served']
 
-const orders = ref([
-  {
-    id: '301',
-    table: '5',
-    customer: 'John Doe',
-    status: 'Pending',
-    time: '10 min ago',
-    items: [
-      { name: 'Burger', qty: 2, price: 25.98 },
-      { name: 'Fries', qty: 2, price: 7.98 }
-    ],
-    total: 33.96
-  },
-  {
-    id: '302',
-    table: '12',
-    customer: 'Jane Smith',
-    status: 'Preparing',
-    time: '15 min ago',
-    items: [
-      { name: 'Pizza', qty: 1, price: 18.99 },
-      { name: 'Salad', qty: 1, price: 9.99 }
-    ],
-    total: 28.98
-  },
-  {
-    id: '303',
-    table: '8',
-    customer: 'Mike Johnson',
-    status: 'Ready',
-    time: '5 min ago',
-    items: [
-      { name: 'Steak', qty: 1, price: 34.99 }
-    ],
-    total: 34.99
-  },
-  {
-    id: '304',
-    table: '3',
-    customer: 'Sarah Williams',
-    status: 'Served',
-    time: '30 min ago',
-    items: [
-      { name: 'Pasta', qty: 2, price: 27.98 },
-      { name: 'Wine', qty: 1, price: 15.99 }
-    ],
-    total: 43.97
-  },
-])
+import type { Order } from '~/types/order'
+
+// Try fetching restaurant orders from API (if available). If endpoint missing, default to empty list.
+const { data: ordersResp, pending: ordersPending, error: ordersError } = await useAsyncData<{ success: boolean; data: Order[] }>('restaurantOrders', () =>
+  $fetch('/api/restaurant/orders').catch(() => ({ success: false, data: [] }))
+)
+
+const orders = computed<Order[]>(() => (ordersResp?.value && Array.isArray(ordersResp.value.data)) ? ordersResp.value.data : [])
 
 const filteredOrders = computed(() => {
   if (activeStatus.value === 'All') return orders.value

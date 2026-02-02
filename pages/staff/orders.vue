@@ -21,7 +21,7 @@
     </div>
 
     <!-- Orders List -->
-    <div class="space-y-4">
+    <div v-if="filteredOrders.length > 0" class="space-y-4">
       <div v-for="order in filteredOrders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-4">
           <div>
@@ -55,6 +55,8 @@
         </div>
       </div>
     </div>
+
+    <div v-else class="p-8 text-center text-gray-500">Ingen tildelte ordrer funnet.</div>
   </div>
 </template>
 
@@ -66,43 +68,14 @@ definePageMeta({
 const activeStatus = ref('Alle')
 const statuses = ['Alle', 'Venter', 'Pågår', 'Ferdig']
 
-const orders = ref([
-  {
-    id: '701',
-    type: 'Romservice',
-    location: 'Rom 301',
-    status: 'Venter',
-    time: '5 min siden',
-    assignedTo: 'Du',
-    items: [
-      { name: 'Frokostsett', qty: 1, price: 24.99 },
-      { name: 'Appelsinjuice', qty: 2, price: 9.98 }
-    ]
-  },
-  {
-    id: '702',
-    type: 'Restaurant',
-    location: 'Bord 12',
-    status: 'Pågår',
-    time: '15 min siden',
-    assignedTo: 'Du',
-    items: [
-      { name: 'Steak', qty: 2, price: 69.98 },
-      { name: 'Vin', qty: 1, price: 35.99 }
-    ]
-  },
-  {
-    id: '703',
-    type: 'Romservice',
-    location: 'Rom 205',
-    status: 'Ferdig',
-    time: '1 time siden',
-    assignedTo: 'Du',
-    items: [
-      { name: 'Club Sandwich', qty: 1, price: 15.99 }
-    ]
-  }
-])
+// Fetch staff-assigned orders (best-effort). If API not present, default to empty list.
+import type { Order } from '~/types/order'
+
+const { data: staffOrdersResp, pending: staffOrdersPending, error: staffOrdersError } = await useAsyncData<{ success: boolean; data: Order[] }>('staffOrders', () =>
+  $fetch('/api/staff/tasks').catch(() => ({ success: false, data: [] }))
+)
+
+const orders = computed<Order[]>(() => (staffOrdersResp?.value && Array.isArray(staffOrdersResp.value.data)) ? staffOrdersResp.value.data : [])
 
 const filteredOrders = computed(() => {
   if (activeStatus.value === 'Alle') return orders.value

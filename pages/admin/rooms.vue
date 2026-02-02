@@ -57,7 +57,7 @@
 
     <!-- Rooms Table -->
     <div class="card overflow-hidden">
-      <table class="table">
+      <table v-if="rooms.length > 0" class="table">
         <thead>
           <tr>
             <th>Romnummer</th>
@@ -90,6 +90,8 @@
           </tr>
         </tbody>
       </table>
+
+      <div v-else class="p-8 text-center text-gray-500">Ingen rom funnet — databasen er tom.</div>
     </div>
 
     <!-- Add Room Modal (simplified) -->
@@ -131,17 +133,15 @@ definePageMeta({
 
 const showAddModal = ref(false)
 
-const rooms = ref([
-  { id: 1, number: '101', type: 'Single', floor: 1, price: 89, status: 'available', lastCleaned: '2 hours ago' },
-  { id: 2, number: '102', type: 'Double', floor: 1, price: 129, status: 'occupied', lastCleaned: '1 day ago' },
-  { id: 3, number: '103', type: 'Suite', floor: 1, price: 249, status: 'available', lastCleaned: '3 hours ago' },
-  { id: 4, number: '201', type: 'Deluxe', floor: 2, price: 189, status: 'maintenance', lastCleaned: '5 days ago' },
-  { id: 5, number: '202', type: 'Double', floor: 2, price: 129, status: 'occupied', lastCleaned: '2 days ago' },
-  { id: 6, number: '301', type: 'Suite', floor: 3, price: 249, status: 'available', lastCleaned: '1 hour ago' },
-])
+import type { Room } from '~/types/room'
+
+const { data: roomsResp, pending: roomsPending, error: roomsError } = await useAsyncData<{ success: boolean; data: Room[] }>('adminRooms', () =>
+  $fetch('/api/rooms').catch(() => ({ success: false, data: [] }))
+)
+
+const rooms = computed<Room[]>(() => (roomsResp?.value && Array.isArray(roomsResp.value.data)) ? roomsResp.value.data : [])
 
 const addRoom = () => {
-  // Connect to Neon DB
   showAddModal.value = false
   alert('Room added! (Connect to Neon DB)')
 }

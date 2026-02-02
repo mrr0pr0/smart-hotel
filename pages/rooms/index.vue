@@ -30,7 +30,7 @@
     </div>
 
     <!-- Rooms Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="rooms.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="room in rooms" :key="room.id" class="card-hover">
         <div class="aspect-video bg-[#111111] rounded-lg mb-4 flex items-center justify-center">
           <svg class="w-16 h-16 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,6 +54,14 @@
         </div>
       </div>
     </div>
+    
+    <!-- Empty state when DB has no rooms -->
+    <div v-else class="card text-center py-12">
+      <svg class="w-16 h-16 mx-auto text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+      <p class="text-gray-500">Databasen er tom — ingen rom funnet.</p>
+    </div>
   </div>
 </template>
 
@@ -62,12 +70,14 @@ definePageMeta({
   layout: 'default'
 })
 
-const rooms = ref([
-  { id: 1, number: '101', type: 'Single', price: 89, status: 'available' },
-  { id: 2, number: '102', type: 'Double', price: 129, status: 'occupied' },
-  { id: 3, number: '103', type: 'Suite', price: 249, status: 'available' },
-  { id: 4, number: '201', type: 'Deluxe', price: 189, status: 'available' },
-  { id: 5, number: '202', type: 'Suite', price: 249, status: 'maintenance' },
-  { id: 6, number: '203', type: 'Double', price: 129, status: 'occupied' },
-])
+import type { Room } from '~/types/room'
+
+// Load rooms from the backend so UI reflects actual DB state
+const { data: roomsResp, pending, error } = await useAsyncData<{ success: boolean; data: Room[] }>('rooms', () =>
+  $fetch('/api/rooms').catch(() => ({ success: false, data: [] }))
+)
+
+const rooms = computed<Room[]>(() => {
+  return (roomsResp?.value && Array.isArray(roomsResp.value.data)) ? roomsResp.value.data : []
+})
 </script>

@@ -11,7 +11,7 @@
 
     <!-- Staff List -->
     <div class="card overflow-hidden">
-      <table class="table">
+      <table v-if="staffList.length > 0" class="table">
         <thead>
         <tr>
           <th>Navn</th>
@@ -46,6 +46,8 @@
         </tr>
         </tbody>
       </table>
+
+      <div v-else class="p-8 text-center text-gray-500">Ingen ansatte funnet — databasen er tom.</div>
     </div>
   </div>
 </template>
@@ -55,11 +57,12 @@ definePageMeta({
   layout: 'default'
 })
 
-const staffList = ref([
-  { id: 1, name: 'Alice Johnson', initials: 'AJ', role: 'Receptionist', department: 'Front Desk', status: 'active', shift: 'Morning' },
-  { id: 2, name: 'Bob Smith', initials: 'BS', role: 'Chef', department: 'Kitchen', status: 'active', shift: 'Evening' },
-  { id: 3, name: 'Carol White', initials: 'CW', role: 'Housekeeper', department: 'Housekeeping', status: 'active', shift: 'Morning' },
-  { id: 4, name: 'David Lee', initials: 'DL', role: 'Waiter', department: 'Restaurant', status: 'off-duty', shift: 'Night' },
-  { id: 5, name: 'Emma Davis', initials: 'ED', role: 'Manager', department: 'Management', status: 'active', shift: 'Day' },
-])
+// Fetch staff list from backend
+import type { User } from '~/types/auth'
+
+const { data: staffResp, pending: staffPending, error: staffError } = await useAsyncData<{ success: boolean; data: User[] }>('staff', () =>
+  $fetch('/api/staff').catch(() => ({ success: false, data: [] }))
+)
+
+const staffList = computed<User[]>(() => (staffResp?.value && Array.isArray(staffResp.value.data)) ? staffResp.value.data : [])
 </script>

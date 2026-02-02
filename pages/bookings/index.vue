@@ -11,7 +11,7 @@
 
     <!-- Bookings Table -->
     <div class="card overflow-hidden">
-      <table class="table">
+      <table v-if="bookings.length > 0" class="table">
         <thead>
         <tr>
           <th>Reservasjons-ID</th>
@@ -41,6 +41,8 @@
         </tr>
         </tbody>
       </table>
+
+      <div v-else class="p-8 text-center text-gray-500">Ingen reservasjoner funnet — databasen er tom.</div>
     </div>
   </div>
 </template>
@@ -50,11 +52,12 @@ definePageMeta({
   layout: 'default'
 })
 
-const bookings = ref([
-  { id: '1001', guest: 'John Doe', room: '101', checkIn: 'Jan 28, 2026', checkOut: 'Jan 30, 2026', status: 'confirmed' },
-  { id: '1002', guest: 'Jane Smith', room: '205', checkIn: 'Jan 27, 2026', checkOut: 'Feb 02, 2026', status: 'confirmed' },
-  { id: '1003', guest: 'Mike Johnson', room: '310', checkIn: 'Jan 29, 2026', checkOut: 'Jan 31, 2026', status: 'pending' },
-  { id: '1004', guest: 'Sarah Williams', room: '412', checkIn: 'Feb 01, 2026', checkOut: 'Feb 05, 2026', status: 'pending' },
-  { id: '1005', guest: 'David Brown', room: '102', checkIn: 'Jan 26, 2026', checkOut: 'Jan 28, 2026', status: 'checked-in' },
-])
+import type { Booking } from '~/types/booking'
+
+// Fetch bookings from backend
+const { data: bookingsResp, pending: bookingsPending, error: bookingsError } = await useAsyncData<{ success: boolean; data: Booking[] }>('bookings', () =>
+  $fetch('/api/bookings').catch(() => ({ success: false, data: [] }))
+)
+
+const bookings = computed<Booking[]>(() => (bookingsResp?.value && Array.isArray(bookingsResp.value.data)) ? bookingsResp.value.data : [])
 </script>

@@ -23,7 +23,7 @@
         </div>
 
         <!-- Menu Items -->
-        <div class="grid md:grid-cols-2 gap-4">
+        <div v-if="menuItems.length > 0" class="grid md:grid-cols-2 gap-4">
           <div v-for="item in menuItems" :key="item.id" class="card-hover">
             <div class="flex gap-4">
               <div class="w-20 h-20 bg-[#111111] rounded-lg flex-shrink-0"></div>
@@ -38,6 +38,8 @@
             </div>
           </div>
         </div>
+
+        <div v-else class="card text-center py-8 col-span-full">Ingen menyelementer funnet — databasen er tom.</div>
       </div>
 
       <!-- Current Order -->
@@ -71,15 +73,14 @@ definePageMeta({
   layout: 'default'
 })
 
+import type { MenuItem } from '~/types/order'
+
 const categories = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Drinks', 'Desserts']
 const activeCategory = ref('All')
 
-const menuItems = ref([
-  { id: 1, name: 'Classic Burger', description: 'Beef patty with lettuce, tomato', price: 12.99, category: 'Lunch' },
-  { id: 2, name: 'Caesar Salad', description: 'Fresh romaine with parmesan', price: 9.99, category: 'Lunch' },
-  { id: 3, name: 'Grilled Salmon', description: 'Atlantic salmon with vegetables', price: 24.99, category: 'Dinner' },
-  { id: 4, name: 'Pancakes', description: 'Stack of 3 fluffy pancakes', price: 8.99, category: 'Breakfast' },
-  { id: 5, name: 'Coffee', description: 'Fresh brewed coffee', price: 3.99, category: 'Drinks' },
-  { id: 6, name: 'Chocolate Cake', description: 'Rich chocolate layer cake', price: 6.99, category: 'Desserts' },
-])
+const { data: menuResp, pending: menuPending, error: menuError } = await useAsyncData<{ success: boolean; data: MenuItem[] }>('menu', () =>
+  $fetch('/api/restaurant/menu').catch(() => ({ success: false, data: [] }))
+)
+
+const menuItems = computed<MenuItem[]>(() => (menuResp?.value && Array.isArray(menuResp.value.data)) ? menuResp.value.data : [])
 </script>

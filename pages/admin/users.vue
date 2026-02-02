@@ -51,7 +51,7 @@
 
     <!-- Users Table -->
     <div class="card overflow-hidden">
-      <table class="table">
+      <table v-if="users.length > 0" class="table">
         <thead>
           <tr>
             <th>Bruker</th>
@@ -93,6 +93,8 @@
           </tr>
         </tbody>
       </table>
+
+      <div v-else class="p-8 text-center text-gray-500">Ingen brukere funnet — databasen er tom.</div>
     </div>
 
     <!-- Add User Modal -->
@@ -145,16 +147,15 @@ definePageMeta({
 
 const showAddModal = ref(false)
 
-const users = ref([
-  { id: 1, name: 'Admin User', initials: 'AU', email: 'admin@hotel.com', role: 'Admin', department: 'Management', status: 'active', lastLogin: '2 hours ago' },
-  { id: 2, name: 'Alice Johnson', initials: 'AJ', email: 'alice@hotel.com', role: 'Receptionist', department: 'Front Desk', status: 'active', lastLogin: '5 hours ago' },
-  { id: 3, name: 'Bob Smith', initials: 'BS', email: 'bob@hotel.com', role: 'Chef', department: 'Kitchen', status: 'active', lastLogin: '1 day ago' },
-  { id: 4, name: 'Carol White', initials: 'CW', email: 'carol@hotel.com', role: 'Housekeeper', department: 'Housekeeping', status: 'active', lastLogin: '3 hours ago' },
-  { id: 5, name: 'David Lee', initials: 'DL', email: 'david@hotel.com', role: 'Waiter', department: 'Restaurant', status: 'inactive', lastLogin: '5 days ago' },
-])
+import type { User } from '~/types/auth'
+
+const { data: usersResp, pending: usersPending, error: usersError } = await useAsyncData<{ success: boolean; data: User[] }>('adminUsers', () =>
+  $fetch('/api/admin/users').catch(() => ({ success: false, data: [] }))
+)
+
+const users = computed<User[]>(() => (usersResp?.value && Array.isArray(usersResp.value.data)) ? usersResp.value.data : [])
 
 const addUser = () => {
-  // Connect to Neon DB
   showAddModal.value = false
   alert('User added! (Connect to Neon DB)')
 }

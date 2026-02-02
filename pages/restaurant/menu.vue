@@ -24,7 +24,7 @@
     </div>
 
     <!-- Menu Items Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="filteredItems.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="item in filteredItems" :key="item.id" class="card">
         <div class="aspect-video bg-[#111111] rounded-lg mb-4 flex items-center justify-center">
           <svg class="w-16 h-16 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,6 +50,10 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div v-else class="card text-center py-12">
+      <p class="text-gray-500">Ingen menyelementer funnet — databasen er tom.</p>
     </div>
 
     <!-- Add Item Modal -->
@@ -94,21 +98,19 @@ definePageMeta({
   layout: 'default'
 })
 
+import type { MenuItem } from '~/types/order'
+
 const showAddModal = ref(false)
 const activeCategory = ref('All')
 
 const categories = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Drinks', 'Desserts']
 
-const menuItems = ref([
-  { id: 1, name: 'Classic Burger', description: 'Beef patty with lettuce, tomato', price: 12.99, category: 'Lunch', available: true },
-  { id: 2, name: 'Caesar Salad', description: 'Fresh romaine with parmesan', price: 9.99, category: 'Lunch', available: true },
-  { id: 3, name: 'Grilled Salmon', description: 'Atlantic salmon with vegetables', price: 24.99, category: 'Dinner', available: true },
-  { id: 4, name: 'Pancakes', description: 'Stack of 3 fluffy pancakes', price: 8.99, category: 'Breakfast', available: true },
-  { id: 5, name: 'Coffee', description: 'Fresh brewed coffee', price: 3.99, category: 'Drinks', available: true },
-  { id: 6, name: 'Chocolate Cake', description: 'Rich chocolate layer cake', price: 6.99, category: 'Desserts', available: false },
-  { id: 7, name: 'Steak', description: 'Premium ribeye steak', price: 34.99, category: 'Dinner', available: true },
-  { id: 8, name: 'Orange Juice', description: 'Freshly squeezed', price: 4.99, category: 'Drinks', available: true },
-])
+// Fetch menu items from backend
+const { data: menuResp, pending: menuPending, error: menuError } = await useAsyncData<{ success: boolean; data: MenuItem[] }>('menuItems', () =>
+  $fetch('/api/restaurant/menu').catch(() => ({ success: false, data: [] }))
+)
+
+const menuItems = computed<MenuItem[]>(() => (menuResp?.value && Array.isArray(menuResp.value.data)) ? menuResp.value.data : [])
 
 const filteredItems = computed(() => {
   if (activeCategory.value === 'All') return menuItems.value

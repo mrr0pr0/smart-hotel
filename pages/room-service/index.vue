@@ -7,7 +7,7 @@
     </div>
 
     <!-- Active Orders -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="orders.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="order in orders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-4">
           <div>
@@ -32,6 +32,8 @@
         </div>
       </div>
     </div>
+
+    <div v-else class="card text-center py-12">Ingen romservicebestillinger funnet — databasen er tom.</div>
   </div>
 </template>
 
@@ -40,35 +42,12 @@ definePageMeta({
   layout: 'default'
 })
 
-const orders = ref([
-  {
-    id: '501',
-    room: '301',
-    status: 'pending',
-    items: [
-      { name: 'Burger', qty: 2, price: 25.98 },
-      { name: 'Fries', qty: 2, price: 7.98 }
-    ],
-    total: 33.96
-  },
-  {
-    id: '502',
-    room: '205',
-    status: 'preparing',
-    items: [
-      { name: 'Pizza', qty: 1, price: 18.99 },
-      { name: 'Coke', qty: 2, price: 5.98 }
-    ],
-    total: 24.97
-  },
-  {
-    id: '503',
-    room: '412',
-    status: 'delivered',
-    items: [
-      { name: 'Salad', qty: 1, price: 12.99 }
-    ],
-    total: 12.99
-  },
-])
+import type { Order } from '~/types/order'
+
+// Fetch room-service orders from backend
+const { data: rsResp, pending: rsPending, error: rsError } = await useAsyncData<{ success: boolean; data: Order[] }>('roomServiceOrders', () =>
+  $fetch('/api/room-service/orders').catch(() => ({ success: false, data: [] }))
+)
+
+const orders = computed<Order[]>(() => (rsResp?.value && Array.isArray(rsResp.value.data)) ? rsResp.value.data : [])
 </script>

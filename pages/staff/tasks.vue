@@ -41,7 +41,7 @@
     </div>
 
     <!-- Tasks List -->
-    <div class="space-y-4">
+    <div v-if="filteredTasks.length > 0" class="space-y-4">
       <div v-for="task in filteredTasks" :key="task.id" class="card">
         <div class="flex items-start gap-4">
           <input
@@ -83,6 +83,8 @@
         </div>
       </div>
     </div>
+
+    <div v-else class="p-8 text-center text-gray-500">Ingen oppgaver funnet.</div>
   </div>
 </template>
 
@@ -94,53 +96,14 @@ definePageMeta({
 const activeFilter = ref('Alle')
 const filters = ['Alle', 'Venter', 'Pågår', 'Ferdig']
 
-const tasks = ref([
-  {
-    id: 1,
-    title: 'Rensk Rom 301',
-    description: 'Grundig rengjøring kreves etter utsjekk',
-    location: 'Etasje 3',
-    priority: 'Høy',
-    status: 'Venter',
-    dueTime: '10:00 AM'
-  },
-  {
-    id: 2,
-    title: 'Lever Håndklær',
-    description: 'Ekstra håndklær forespurt for Rom 205',
-    location: 'Etasje 2',
-    priority: 'Medium',
-    status: 'Pågår',
-    dueTime: '11:30 AM'
-  },
-  {
-    id: 3,
-    title: 'Fyll Minibar på nytt',
-    description: 'Fyll minibar i Rom 412',
-    location: 'Etasje 4',
-    priority: 'Lav',
-    status: 'Venter',
-    dueTime: '2:00 PM'
-  },
-  {
-    id: 4,
-    title: 'Reparer AC-enhet',
-    description: 'AC vedlikehold i Rom 108',
-    location: 'Etasje 1',
-    priority: 'Høy',
-    status: 'Pågår',
-    dueTime: '12:00 PM'
-  },
-  {
-    id: 5,
-    title: 'Forbered Rom 215',
-    description: 'Klargjøring av rom til VIP-gjest ankomst',
-    location: 'Etasje 2',
-    priority: 'Høy',
-    status: 'Ferdig',
-    dueTime: '9:00 AM'
-  }
-])
+import type { Task } from '~/types/order'
+
+// Fetch staff tasks from backend
+const { data: tasksResp, pending: tasksPending, error: tasksError } = await useAsyncData<{ success: boolean; data: Task[] }>('staffTasks', () =>
+  $fetch('/api/staff/tasks').catch(() => ({ success: false, data: [] }))
+)
+
+const tasks = computed<Task[]>(() => (tasksResp?.value && Array.isArray(tasksResp.value.data)) ? tasksResp.value.data : [])
 
 const filteredTasks = computed(() => {
   if (activeFilter.value === 'Alle') return tasks.value
@@ -166,9 +129,6 @@ const getStatusBadge = (status: string) => {
 }
 
 const toggleTask = (taskId: number) => {
-  const task = tasks.value.find(t => t.id === taskId)
-  if (task) {
-    task.status = task.status === 'Completed' ? 'Pending' : 'Completed'
-  }
+  // TODO: implement toggle via API
 }
 </script>

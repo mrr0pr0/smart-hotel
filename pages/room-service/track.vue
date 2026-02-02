@@ -20,7 +20,7 @@
     </div>
 
     <!-- Active Orders -->
-    <div class="space-y-6">
+    <div v-if="orders.length > 0" class="space-y-6">
       <div v-for="order in orders" :key="order.id" class="card">
         <div class="flex items-start justify-between mb-6">
           <div>
@@ -90,6 +90,8 @@
         </div>
       </div>
     </div>
+
+    <div v-else class="p-8 text-center text-gray-500">Ingen romservicebestillinger funnet.</div>
   </div>
 </template>
 
@@ -100,44 +102,14 @@ definePageMeta({
 
 const searchQuery = ref('')
 
-const orders = ref([
-  {
-    id: '501',
-    room: '301',
-    time: '15 min ago',
-    status: 'Preparing',
-    total: 33.96,
-    items: [
-      { name: 'Burger', qty: 2, price: 25.98 },
-      { name: 'Fries', qty: 2, price: 7.98 }
-    ],
-    timeline: [
-      { label: 'Order Received', time: '2:30 PM', completed: true },
-      { label: 'Kitchen Preparing', time: '2:35 PM', completed: true },
-      { label: 'Ready for Delivery', time: 'Pending', completed: false },
-      { label: 'Out for Delivery', time: 'Pending', completed: false },
-      { label: 'Delivered', time: 'Pending', completed: false }
-    ]
-  },
-  {
-    id: '502',
-    room: '205',
-    time: '30 min ago',
-    status: 'Out for Delivery',
-    total: 24.97,
-    items: [
-      { name: 'Pizza', qty: 1, price: 18.99 },
-      { name: 'Coke', qty: 2, price: 5.98 }
-    ],
-    timeline: [
-      { label: 'Order Received', time: '2:15 PM', completed: true },
-      { label: 'Kitchen Preparing', time: '2:20 PM', completed: true },
-      { label: 'Ready for Delivery', time: '2:35 PM', completed: true },
-      { label: 'Out for Delivery', time: '2:40 PM', completed: true },
-      { label: 'Delivered', time: 'Pending', completed: false }
-    ]
-  }
-])
+import type { Order } from '~/types/order'
+
+// Fetch live room-service orders (if backend provides)
+const { data: trackResp, pending: trackPending, error: trackError } = await useAsyncData<{ success: boolean; data: Order[] }>('roomServiceTrack', () =>
+  $fetch('/api/room-service/orders').catch(() => ({ success: false, data: [] }))
+)
+
+const orders = computed<Order[]>(() => (trackResp?.value && Array.isArray(trackResp.value.data)) ? trackResp.value.data : [])
 
 const getStatusBadge = (status: string) => {
   const badges: Record<string, string> = {
