@@ -61,7 +61,7 @@ definePageMeta({
 import type { User } from '~/types/auth'
 
 const { data: staffResp, pending: staffPending, error: staffError } = await useAsyncData<{ success: boolean; data: User[] }>('staff', () =>
-  $fetch('/api/staff').catch(() => ({ success: false, data: [] }))
+  $fetch('/api/admin/users').catch(() => ({ success: false, data: [] }))
 )
 
 const staffList = computed<User[]>(() => (staffResp?.value && Array.isArray(staffResp.value.data)) ? staffResp.value.data : [])

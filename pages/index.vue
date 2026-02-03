@@ -67,19 +67,23 @@
       <div class="card">
         <h2 class="text-xl font-semibold text-white mb-4">Nylige Reservasjoner</h2>
         <div class="space-y-3">
-          <div v-for="i in 5" :key="i" class="flex items-center justify-between p-3 bg-[#111111] rounded-lg">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
-                <span class="text-sm font-semibold">JD</span>
-              </div>
-              <div>
-                <p class="text-sm font-medium text-white">John Doe</p>
-                <p class="text-xs text-gray-500">Rom 301 - Suite</p>
+            <div v-if="recentBookings.length === 0" class="text-center text-gray-500 p-6">Ingen nylige reservasjoner funnet.</div>
+
+            <div v-else>
+              <div v-for="booking in recentBookings" :key="booking.id" class="flex items-center justify-between p-3 bg-[#111111] rounded-lg">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                    <span class="text-sm font-semibold">{{ booking.guest?.firstName?.charAt(0) }}{{ booking.guest?.lastName?.charAt(0) }}</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-white">{{ booking.guest?.firstName }} {{ booking.guest?.lastName }}</p>
+                    <p class="text-xs text-gray-500">Rom {{ booking.room?.number || booking.roomId }}</p>
+                  </div>
+                </div>
+                <span class="badge-success">{{ booking.status }}</span>
               </div>
             </div>
-            <span class="badge-success">Aktiv</span>
           </div>
-        </div>
       </div>
 
       <!-- Quick Actions -->
@@ -100,4 +104,12 @@
 definePageMeta({
   layout: 'default'
 })
+
+import type { Booking } from '~/types/booking'
+
+const { data: recentResp } = await useAsyncData<{ success: boolean; data: Booking[] }>('recentBookings', () =>
+  $fetch('/api/bookings').catch(() => ({ success: false, data: [] }))
+)
+
+const recentBookings = computed<Booking[]>(() => (recentResp?.value && Array.isArray(recentResp.value.data)) ? recentResp.value.data.slice(0,5) : [])
 </script>

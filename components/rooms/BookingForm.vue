@@ -102,6 +102,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Room } from '~/types/room'
+import Input from '~/components/ui/Input.vue'
 
 interface Props {
   room?: Room
