@@ -30,7 +30,7 @@
           <form class="space-y-4">
             <div>
               <label class="block text-sm text-gray-400 mb-2">Hotellnavn</label>
-              <input type="text" class="input" value="SmartStay Hotel" />
+              <input type="text" class="input" value="smart3 Hotel" />
             </div>
             <div>
               <label class="block text-sm text-gray-400 mb-2">Kontakt E-post</label>
@@ -172,10 +172,10 @@ definePageMeta({
 const activeSection = ref('general')
 
 const sections = [
-  { id: 'general', name: 'General' },
-  { id: 'booking', name: 'Booking' },
-  { id: 'payment', name: 'Payment' },
-  { id: 'notifications', name: 'Notifications' },
-  { id: 'security', name: 'Security' },
+  { id: 'general', name: 'General', icon: 'i-heroicons-cog-6-tooth' },
+  { id: 'booking', name: 'Booking', icon: 'i-heroicons-calendar' },
+  { id: 'payment', name: 'Payment', icon: 'i-heroicons-credit-card' },
+  { id: 'notifications', name: 'Notifications', icon: 'i-heroicons-bell' },
+  { id: 'security', name: 'Security', icon: 'i-heroicons-lock-closed' },
 ]
 </script>

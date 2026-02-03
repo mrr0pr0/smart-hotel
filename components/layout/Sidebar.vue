@@ -1,10 +1,6 @@
 <template>
   <aside class="w-64 bg-[#111111] border-r border-[#2a2a2a] flex flex-col">
-    <!-- Logo -->
-    <div class="p-6 border-b border-[#2a2a2a]">
-      <h1 class="text-2xl font-bold text-gradient">SmartStay</h1>
-      <p class="text-xs text-gray-500 mt-1">Hotel Management</p>
-    </div>
+
 
     <!-- Navigation -->
     <nav class="flex-1 overflow-y-auto p-4 space-y-1">

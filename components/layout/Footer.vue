@@ -2,7 +2,7 @@
   <footer class="bg-[#111111] border-t border-[#2a2a2a] px-6 py-4">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="text-sm text-gray-500">
-        © {{ currentYear }} SmartStay Hotel Management. All rights reserved.
+        © {{ currentYear }} all rights reserved.
       </div>
       <div class="flex items-center gap-6">
         <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</a>

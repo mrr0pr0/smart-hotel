@@ -3,7 +3,7 @@
     <div class="card">
       <!-- Logo -->
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gradient mb-2">SmartStay</h1>
+        <h1 class="text-3xl font-bold text-gradient mb-2">staylogo2</h1>
         <p class="text-gray-400">Opprett kontoen din</p>
       </div>
 

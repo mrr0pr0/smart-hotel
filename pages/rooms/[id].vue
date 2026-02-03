@@ -71,10 +71,10 @@
         <div class="card">
           <h2 class="text-xl font-semibold text-white mb-4">Rask Handling</h2>
           <div class="space-y-3">
-            <button class="btn-primary w-full">Booking Rom</button>
-            <button class="btn-secondary w-full">Merk som vedlikehold</button>
-            <button class="btn-secondary w-full">Vis tidsplan</button>
-            <button class="btn-ghost w-full">Rediger detaljer</button>
+            <button @click="handleBooking" class="btn-primary w-full">Booking Rom</button>
+            <button @click="handleMaintenance" class="btn-secondary w-full">Merk som vedlikehold</button>
+            <button @click="handleSchedule" class="btn-secondary w-full">Vis tidsplan</button>
+            <button @click="handleEditDetails" class="btn-ghost w-full">Rediger detaljer</button>
           </div>
         </div>
 
@@ -110,7 +110,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const route = useRoute()
+const router = useRouter()
 
 definePageMeta({
   layout: 'default'
@@ -145,4 +148,26 @@ const room = ref({
     { id: 3, guest: 'Mike Johnson', dates: 'Jan 10-12, 2026', nights: 2 }
   ]
 })
+
+// Handler functions
+const handleBooking = () => {
+  console.log('Booking button clicked')
+  router.push('/bookings/new')
+}
+
+const handleMaintenance = () => {
+  console.log('Maintenance button clicked')
+  room.value.status = 'maintenance'
+  alert('Room marked as maintenance')
+}
+
+const handleSchedule = () => {
+  console.log('Schedule button clicked')
+  alert('Schedule view not yet implemented')
+}
+
+const handleEditDetails = () => {
+  console.log('Edit details button clicked')
+  alert('Edit details not yet implemented')
+}
 </script>
