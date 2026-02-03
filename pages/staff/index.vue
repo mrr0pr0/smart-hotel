@@ -6,7 +6,7 @@
         <h1 class="text-3xl font-bold text-white mb-2">Personalstyring</h1>
         <p class="text-gray-400">Administrer hotellpersonalet og skift</p>
       </div>
-      <button class="btn-primary">Legg til personalet</button>
+      <NuxtLink to="/staff/new" class="btn-primary">Legg til personalet</NuxtLink>
     </div>
 
     <!-- Staff List -->
@@ -41,7 +41,7 @@
           </td>
           <td>{{ staff.shift }}</td>
           <td>
-            <button class="btn-ghost text-xs px-2 py-1">Rediger</button>
+            <NuxtLink :to="`/staff/${staff.id}`" class="btn-ghost text-xs px-2 py-1">Rediger</NuxtLink>
           </td>
         </tr>
         </tbody>

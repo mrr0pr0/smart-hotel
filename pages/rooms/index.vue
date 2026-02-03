@@ -6,7 +6,7 @@
         <h1 class="text-3xl font-bold text-white mb-2">Rom</h1>
         <p class="text-gray-400">Administrer alle hotellrom</p>
       </div>
-      <button class="btn-primary">Legg til nytt rom</button>
+      <NuxtLink to="/rooms/[id]" class="btn-primary">Legg til nytt rom</NuxtLink>
     </div>
 
     <!-- Filters -->
@@ -50,7 +50,7 @@
 
         <div class="flex items-center justify-between">
           <p class="text-2xl font-bold text-white">${{ room.price }}</p>
-          <button class="btn-primary btn text-sm px-3 py-1">Vis detaljer</button>
+          <NuxtLink :to="`/rooms/${room.id}`" class="btn-primary btn text-sm px-3 py-1">Vis detaljer</NuxtLink>
         </div>
       </div>
     </div>

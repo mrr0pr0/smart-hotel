@@ -28,7 +28,7 @@
 
         <div class="border-t border-[#2a2a2a] pt-4 flex items-center justify-between">
           <span class="text-lg font-bold text-white">${{ order.total }}</span>
-          <button class="btn-primary text-sm px-3 py-1">Oppdater Status</button>
+          <button @click="updateOrderStatus(order.id, order.status)" class="btn-primary text-sm px-3 py-1">Oppdater Status</button>
         </div>
       </div>
     </div>
@@ -50,4 +50,24 @@ const { data: rsResp, pending: rsPending, error: rsError } = await useAsyncData<
 )
 
 const orders = computed<Order[]>(() => (rsResp?.value && Array.isArray(rsResp.value.data)) ? rsResp.value.data : [])
+
+const updateOrderStatus = async (orderId: string, currentStatus: string) => {
+  const statusMap: Record<string, string> = {
+    'pending': 'preparing',
+    'preparing': 'completed',
+    'completed': 'pending'
+  }
+  const newStatus = statusMap[currentStatus] || 'pending'
+  
+  try {
+    await $fetch(`/api/room-service/${orderId}`, {
+      method: 'PUT',
+      body: { status: newStatus }
+    })
+    // Refresh the orders
+    await rsResp.value && (rsResp.value = { ...(rsResp.value as any), data: [] })
+  } catch (e) {
+    alert('Feil ved oppdatering av status')
+  }
+}
 </script>

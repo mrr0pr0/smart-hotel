@@ -36,7 +36,7 @@
               </span>
           </td>
           <td>
-            <button class="btn-ghost text-xs px-2 py-1">Vis</button>
+            <NuxtLink :to="`/bookings/${booking.id}`" class="btn-ghost text-xs px-2 py-1">Vis</NuxtLink>
           </td>
         </tr>
         </tbody>
