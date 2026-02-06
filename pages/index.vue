@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-white mb-2">Dashbord</h1>
-      <p class="text-gray-400">Velkommen tilbake! Her er hva som skjer i dag.</p>
+      <p class="text-gray-400">Velkommen tilbake Her er hva som skjer i dag.</p>
     </div>
 
     <!-- Stats Grid -->
